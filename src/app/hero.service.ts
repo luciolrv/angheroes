@@ -6,8 +6,8 @@ import { HEROES } from './mock-heroes';
 
 import * as hero from './mock-heroes';
 
-//heroes = hero.HEROES; // use the class
-//heroes = HEROES; // use the class?
+ //heroes = hero.HEROES; // use the class
+ //heroes = HEROES; // use the class?
 
 import { MessageService } from './message.service';
 
@@ -22,5 +22,11 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
     this.messageService.add('HeroService: fetched heroes');
     return of(HEROES);
+  }
+
+  getHero(id: number): Observable<Hero> {
+    // TODO: send the message _after_ fetching the hero
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
   }
 }
